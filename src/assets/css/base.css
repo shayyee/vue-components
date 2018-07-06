@@ -1,0 +1,14 @@
+*,:after,:before {
+    box-sizing: border-box;
+}
+button,input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline:none;border:0;
+}
+.clearfix{
+    clear: both;
+}
+.no-margin {
+    margin: 0 !important;
+}
