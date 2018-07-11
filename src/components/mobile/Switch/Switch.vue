@@ -98,7 +98,8 @@ export default {
         transition: all .2s ease-in-out;
     }
     .vue-switch:focus {
-        box-shadow: 0 0 0 2px rgba(45,140,240,.2);
+        box-shadow: none;
+        /*box-shadow: 0 0 0 2px rgba(45,140,240,.2);*/
         outline: 0;
     }
     .vue-switch:focus:hover {
