@@ -9,6 +9,7 @@
                 <dd><router-link to="/pc/pagination">Pagination</router-link></dd>
                 <dt>MOBILE端组件</dt>
                 <dd><router-link to="/mobile/switch">Switch</router-link></dd>
+                <dd><router-link to="/mobile/slider">Slider</router-link></dd>
             </dl>
         </main>
     </div>

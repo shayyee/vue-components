@@ -5,6 +5,7 @@ import PC from '@/components/pc/PC'
 import Mobile from '@/components/mobile/Mobile'
 import Pagination from '@/components/pc/Pagination/Demo'
 import Switch from '@/components/mobile/Switch/Demo'
+import Slider from '@/components/mobile/Slider/Demo'
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ export default new Router({
         {
           path: 'switch',
           component: Switch
+        },
+        {
+          path: 'slider',
+          component: Slider
         }
       ]
     }

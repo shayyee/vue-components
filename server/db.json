@@ -60,5 +60,32 @@
       "gender": "famale",
       "id": 10010
     }
+  ],
+  "slider": [
+    {
+      "linkUrl": "https://y.qq.com/m/act/sfhd/151.html?ADTAG=jdt",
+      "picUrl": "http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/301136.jpg",
+      "id": 16537
+    },
+    {
+      "linkUrl": "https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=4124273&g_f=shoujijiaodian",
+      "picUrl": "http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/300107.jpg",
+      "id": 16504
+    },
+    {
+      "linkUrl": "http://y.qq.com/w/album.html?albummid=003nlRrP1C4A74",
+      "picUrl": "http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/301143.jpg",
+      "id": 16545
+    },
+    {
+      "linkUrl": "http://y.qq.com/w/album.html?albummid=0010Gbyq1rGLMY",
+      "picUrl": "http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/301209.jpg",
+      "id": 16536
+    },
+    {
+      "linkUrl": "http://y.qq.com/w/album.html?albummid=004AptBn1uXekc",
+      "picUrl": "http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/300998.jpg",
+      "id": 16539
+    }
   ]
 }
