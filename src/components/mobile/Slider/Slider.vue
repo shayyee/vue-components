@@ -8,7 +8,7 @@
         </div>
         <div v-if="showDot" class="dots">
             <span class="dot" :key="index" v-for="(item, index) in dots"
-                  :class="{active: currentIndex === index}"></span>
+                  :class="{active: currentPageIndex === index}"></span>
         </div>
     </div>
 </template>
@@ -28,7 +28,7 @@ export default {
     },
     interval: { // 播放间隔时间
       type: Number,
-      default: 4000
+      default: 3000
     },
     showDot: {
       type: Boolean,
@@ -53,16 +53,53 @@ export default {
   data () {
     return {
       dots: [],
-      currentIndex: 0
+      currentPageIndex: 0
     }
   },
   mounted () {
     this.update()
+
+    window.addEventListener('resize', () => {
+      if (!this.slider || !this.slider.enabled) {
+        return
+      }
+      clearTimeout(this.resizeTimer)
+      this.resizeTimer = setTimeout(() => {
+        this.refresh()
+        if (this.slider.isInTransition) {
+          this._onScrollEnd()
+        } else {
+          if (this.autoPlay) {
+            this._play()
+          }
+        }
+      }, 60)
+    })
+  },
+  activated () {
+    if (!this.slider) {
+      return
+    }
+    this.slider.enable()
+    let pageIndex = this.slider.getCurrentPage().pageX
+    this.slider.goToPage(pageIndex, 0, 0)
+    this.currentPageIndex = pageIndex
+    if (this.autoPlay) {
+      this._play()
+    }
+  },
+  deactivated () {
+    this.slider.disable()
+    clearTimeout(this.timer)
+  },
+  beforeDestroy () {
+    this.slider.disable()
+    clearTimeout(this.timer)
   },
   methods: {
     update () {
-      if (this.slide) {
-        this.slide.destroy()
+      if (this.slider) {
+        this.slider.destroy()
       }
       this.$nextTick(() => {
         this.init()
@@ -74,11 +111,15 @@ export default {
         this._initDots()
       }
       this._initSlider()
-//      if (this.autoPlay) {
-//        this._play()
-//      }
+      if (this.autoPlay) {
+        this._play()
+      }
     },
-    _setSliderWidth () {
+    refresh () {
+      this._setSliderWidth(true)
+      this.slider.refresh()
+    },
+    _setSliderWidth (isResize) {
       this.children = this.$refs.sliderGroup.children
       let width = 0
       let sliderWidth = this.$refs.slider.clientWidth
@@ -88,13 +129,13 @@ export default {
         child.style.width = sliderWidth + 'px'
         width += sliderWidth
       }
-      if (this.loop) {
+      if (this.loop && !isResize) {
         width += 2 * sliderWidth
       }
       this.$refs.sliderGroup.style.width = width + 'px'
     },
     _initSlider () {
-      this.slide = new BScroll(this.$refs.slide, {
+      this.slider = new BScroll(this.$refs.slider, {
         scrollX: true,
         scrollY: false,
         momentum: false, // 当快速在屏幕上滑动一段距离的时候，会根据滑动的距离和时间计算出动量，并生成滚动动画。设置为 false 则关闭动画。
@@ -107,12 +148,23 @@ export default {
         stopPropagation: true,
         click: this.click
       })
+      this.slider.on('scrollEnd', this._onScrollEnd)
+    },
+    _onScrollEnd () {
+      let pageIndex = this.slider.getCurrentPage().pageX
+      this.currentPageIndex = pageIndex
+      if (this.autoPlay) {
+        this._play()
+      }
     },
     _initDots () {
-
+      this.dots = new Array(this.children.length)
     },
     _play () {
-
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.slider.next()
+      }, this.interval)
     }
   }
 }
