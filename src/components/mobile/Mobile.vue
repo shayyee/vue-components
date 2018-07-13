@@ -1,6 +1,6 @@
 <template>
-    <section>
+    <div>
         <h1>Mobile端</h1>
         <router-view/>
-    </section>
+    </div>
 </template>
