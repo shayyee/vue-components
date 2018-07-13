@@ -6,6 +6,7 @@ import Mobile from '@/components/mobile/Mobile'
 import Pagination from '@/components/pc/Pagination/Demo'
 import Switch from '@/components/mobile/Switch/Demo'
 import Slider from '@/components/mobile/Slider/Demo'
+import Scroll from '@/components/mobile/Scroll/Demo'
 
 Vue.use(Router)
 
@@ -41,6 +42,10 @@ export default new Router({
         {
           path: 'slider',
           component: Slider
+        },
+        {
+          path: 'scroll',
+          component: Scroll
         }
       ]
     }
