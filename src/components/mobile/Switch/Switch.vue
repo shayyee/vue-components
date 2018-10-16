@@ -45,12 +45,16 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      currentValue: this.value
-    }
-  },
   computed: {
+    currentValue: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('input', val)
+        this.$emit('change', val)
+      }
+    },
     wrapClasses () {
       return [
         `${prefixCls}`,
@@ -73,8 +77,6 @@ export default {
       }
       const checked = this.currentValue === this.trueValue ? this.falseValue : this.trueValue
       this.currentValue = checked
-      this.$emit('input', checked)
-      this.$emit('change', checked)
     }
   }
 }
